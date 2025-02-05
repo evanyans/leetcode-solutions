@@ -1,4 +1,6 @@
 class Solution:
+    # Attempted again 2/5/2025
+    # Major aha moment: isPalindrome out to in is so slow for this problem, just go inside out
     def longestPalindrome(self, s: str) -> str:
         if len(s) == 1:
             return s
