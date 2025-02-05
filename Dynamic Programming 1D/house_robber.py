@@ -1,8 +1,10 @@
-class Solution:
+class Solution
+    # Attempted again 2/5/2025
+    # Major aha moment: dont be afraid of making wrappers for recursion
     def rob(self, nums: List[int]) -> int:
         memo = {}
         def rob_solve(idx):
-            if idx >= len(nums):
+            if idx >= len(nums): 
                 return 0
             if idx in memo:
                 return memo[idx]
