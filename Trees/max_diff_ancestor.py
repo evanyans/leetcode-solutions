@@ -7,6 +7,8 @@
 
 #
 class Solution:
+    # Attempted 2/24/2025
+    # aha: understand base case for DFS, please revisit.
     def maxAncestorDiff(self, root: Optional[TreeNode]) -> int:
         def dfs(root, max_val, min_val):
             if not root:
