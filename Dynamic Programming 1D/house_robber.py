@@ -1,20 +1,16 @@
-class Solution
-    # Attempted again 2/5/2025
-    # Major aha moment: dont be afraid of making wrappers for recursion
+class Solution:
+    # Attempted3/15/2025
+    # AHA: now i understand DP 1d
     def rob(self, nums: List[int]) -> int:
+
         memo = {}
-        def rob_solve(idx):
-            if idx >= len(nums): 
+        def dp(i):
+            if i >= len(nums):
                 return 0
-            if idx in memo:
-                return memo[idx]
-
-            # rob first house, then we can only rob the 3rd house now
-            rob_first = nums[idx] + rob_solve(idx + 2)
-            # dont rob first house, then we can only rob the 2nd house 
-            rob_second = rob_solve(idx + 1)
-
-            memo[idx] = max(rob_first, rob_second)
-            return memo[idx]
-        return rob_solve(0)
-        
+            if i in memo:
+                return memo[i]
+            # Either rob first house (means we must rob thid house)
+            #   or we rob 2nd house (means we dindt rob first house)
+            memo[i] = max(nums[i] + dp(i + 2), dp(i + 1))
+            return memo[i]
+        return dp(0)
