@@ -1,32 +1,25 @@
 class Solution:
+    # Attempted 3/23/2025
+    # AHA: very simple DFS, barebones matrix dfs
     def numIslands(self, grid: List[List[str]]) -> int:
-        explored = set()
-        width = len(grid[0]) - 1
-        height = len(grid) - 1
+        def valid(row, col):
+            return 0 <= row < m and 0 <= col < n and grid[row][col] == "1"
+        directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        def dfs(row, col):
+            for dx, dy in directions:
+                next_row, next_col = row + dy, col + dx
+                if valid(next_row, next_col) and (next_row, next_col) not in seen:
+                    seen.add((next_row, next_col))
+                    dfs(next_row, next_col)
 
-        def search(grid):
-            counter = 0
-            for i, m in enumerate(grid):
-                for j, n in enumerate(grid[i]):
-                    print(counter)
-                    if (j, i) not in explored and n == "1":
-                        dfs(j, i, grid)
-                        counter += 1
-            return counter
-
-        def dfs(x, y, grid):
-            if (x, y) in explored:
-                return
-            explored.add((x, y))
-            if x > 0 and grid[y][x-1] == "1":
-                dfs(x-1, y, grid)
-            if x < width and grid[y][x+1] == "1":
-                dfs(x+1, y, grid)
-            if y < height and grid[y+1][x] == "1":
-                dfs(x, y+1, grid)
-            if y > 0 and grid[y-1][x] == "1":
-                dfs(x, y-1, grid)
-
-        return search(grid)
-
-
+        m = len(grid)
+        n = len(grid[0])
+        ans = 0
+        seen = set()
+        for row in range(m):
+            for col in range(n):
+                if grid[row][col] == "1" and (row, col) not in seen:
+                    ans += 1
+                    seen.add((row, col))
+                    dfs(row, col)
+        return ans
