@@ -6,20 +6,19 @@
 #         self.right = None
 
 class Solution:
-    # Attempted 3/16/2025
-    # AHA: use existence as a boolean
+    # Re-Attempted 4/4/2025 
+    # AHA: OHH WE ARE LOOKING FOR THE SPLIT POINT USING BINARY SEARCH
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        def dfs(root):
-            if not root:
-                return None
-            if root == p or root == q:
-               return root
-
-            left = dfs(root.left)
-            right = dfs(root.right)
-            if left and right:
+        # lets just make p the smaller one
+        if p.val > q.val:
+            tmp = q
+            q = p
+            p = tmp
+        while root:
+            if q.val < root.val: #both values are in the left tree
+                root = root.left
+            elif p.val > root.val: #both values are in the right tree
+                root = root.right
+            else:
                 return root
-            elif left:
-                return left
-            return right
-        return dfs(root)
+            
