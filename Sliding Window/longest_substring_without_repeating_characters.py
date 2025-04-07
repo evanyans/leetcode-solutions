@@ -1,4 +1,20 @@
 class Solution:
+# RE-attempted 4/6/2025
+# AHA: make sure window condition is right, think about it most.
+def lengthOfLongestSubstring(self, s: str) -> int:
+    left = ans = 0
+    curr = Counter()
+    # our window condition is that the character is different
+    for right in range(len(s)):
+        curr[s[right]] += 1
+        # while window condition broken
+        while curr[s[right]] > 1:
+            curr[s[left]] -= 1
+            left += 1
+        ans = max(ans, right - left + 1)
+
+    return ans
+        
     # Attempted 2nd time at 2/9/2025
     # aha: i forgot to check max, this is a basic sliding window format
     def lengthOfLongestSubstring(self, s: str) -> int:
