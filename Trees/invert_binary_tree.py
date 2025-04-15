@@ -5,11 +5,15 @@
 #         self.left = left
 #         self.right = right
 
+# Reatetempted 4/14/2025
+# AHA: dif order
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        if root:
-            root.left, root.right = root.right, root.left
-            self.invertTree(root.left)
-            self.invertTree(root.right)
-        
+        if not root:
+            return None
+        temp = root.right
+        root.right = root.left
+        root.left = temp
+        self.invertTree(root.left)
+        self.invertTree(root.right)
         return root
