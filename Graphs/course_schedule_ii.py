@@ -1,4 +1,6 @@
 class Solution:
+    #  Attempted 4/20/2025
+    # AHA: same as course schedule 1, but change how you return the answer
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
         graph = defaultdict(list)
 
